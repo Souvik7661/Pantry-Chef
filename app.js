@@ -690,8 +690,56 @@ window.deleteShoppingItem = function(id) {
   renderShoppingList();
 };
 
+// 0. OPENING SPLASH SCREEN LOGIC (Matches Android SplashScreen.kt)
+function initOpeningSplashScreen() {
+  const splashEl = document.getElementById("openingSplashScreen");
+  const percentEl = document.getElementById("splashPercent");
+  const fillEl = document.getElementById("splashProgressFill");
+  if (!splashEl || !percentEl || !fillEl) return;
+
+  splashEl.classList.remove("hidden");
+  let progress = 0;
+  let hasSkipped = false;
+  const duration = 2500; // 2.5 seconds matching Android SplashScreen.kt
+  const intervalTime = 25;
+  const increment = 100 / (duration / intervalTime);
+
+  const timer = setInterval(() => {
+    if (hasSkipped) {
+      clearInterval(timer);
+      return;
+    }
+    progress += increment;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(timer);
+      percentEl.textContent = "100%";
+      fillEl.style.width = "100%";
+      setTimeout(() => {
+        dismissSplash();
+      }, 150);
+    } else {
+      percentEl.textContent = `${Math.floor(progress)}%`;
+      fillEl.style.width = `${progress}%`;
+    }
+  }, intervalTime);
+
+  function dismissSplash() {
+    hasSkipped = true;
+    clearInterval(timer);
+    splashEl.classList.add("hidden");
+  }
+
+  splashEl.onclick = () => dismissSplash();
+
+  document.getElementById("replaySplashBtn")?.addEventListener("click", () => {
+    initOpeningSplashScreen();
+  });
+}
+
 // 8. EVENT LISTENERS INITIALIZATION
 document.addEventListener("DOMContentLoaded", () => {
+  initOpeningSplashScreen();
   renderPantryChips();
   renderMatchingRecipes();
   renderDiscoverRecipes();

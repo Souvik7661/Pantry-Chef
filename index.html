@@ -39,6 +39,7 @@
       </div>
 
       <div class="header-actions">
+        <button id="replaySplashBtn" class="btn-secondary" style="padding: 0.5rem 0.85rem; font-size: 0.8rem; border-radius: var(--radius-full);" title="View Opening Screen">🎬 Intro</button>
         <button id="openAiAssistantBtn" class="btn-ai-assistant" aria-label="Open AI Chef Assistant">
           <span class="sparkle">✨</span>
           <span>Ask AI Chef</span>
@@ -46,6 +47,27 @@
       </div>
     </div>
   </header>
+
+  <!-- OPENING SPLASH SCREEN (Ported 1-to-1 from Android SplashScreen.kt) -->
+  <div id="openingSplashScreen" class="opening-splash-overlay" role="button" tabindex="0" title="Click anywhere to skip">
+    <div class="splash-ambient-aura"></div>
+    <div class="splash-center-content">
+      <div class="splash-logo-container">
+        <img src="img_recipes_logo.png" alt="Recipes In Minutes Logo" class="splash-logo-img">
+      </div>
+
+      <div class="splash-loading-box">
+        <div class="splash-loading-header">
+          <span class="splash-loading-text">Loading<span class="splash-dots">...</span></span>
+          <span class="splash-percentage" id="splashPercent">0%</span>
+        </div>
+        <div class="splash-bar-track">
+          <div class="splash-bar-fill" id="splashProgressFill"></div>
+        </div>
+        <div class="splash-hint">Tap anywhere to skip directly</div>
+      </div>
+    </div>
+  </div>
 
   <!-- Navigation Tabs -->
   <nav class="nav-tabs-bar" aria-label="Main Navigation">
