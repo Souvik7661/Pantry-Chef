@@ -1,0 +1,6 @@
+{
+  "name": "PantryChef",
+  "description": "Smart recipe finder that turns ingredients in your kitchen into delicious meals with AI matching, pantry tracking, and step-by-step cooking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
