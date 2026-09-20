@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PantryChef - Smart AI Kitchen & Recipe Matcher</title>
+  <meta name="description" content="Turn ingredients in your kitchen into delicious meals with AI matching, pantry tracking, meal planning, and interactive step-by-step cooking.">
+  <meta name="theme-color" content="#0c0d10">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="PantryChef - Smart AI Kitchen & Recipe Matcher">
+  <meta property="og:description" content="Smart recipe finder that turns ingredients in your kitchen into delicious meals with AI matching and step-by-step cooking.">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts: Outfit and Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="index.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%20%22100%22%20%22100%22><text y=%22.9em%22 font-size=%2290%22>👨‍🍳</text></svg>">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand" id="brandBtn" role="button" tabindex="0">
+        <div class="brand-icon">🍳</div>
+        <div>
+          <span class="brand-name">PantryChef</span>
+          <span class="brand-badge">AI 2.0</span>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="globalSearchInput" class="search-input" placeholder="Search 50+ recipes or ingredients (e.g., chicken, pasta)..." aria-label="Search recipes or ingredients">
+      </div>
+
+      <div class="header-actions">
+        <button id="openAiAssistantBtn" class="btn-ai-assistant" aria-label="Open AI Chef Assistant">
+          <span class="sparkle">✨</span>
+          <span>Ask AI Chef</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="nav-tabs-bar" aria-label="Main Navigation">
+    <div class="nav-tabs-container">
+      <button class="tab-btn active" data-tab="kitchen">
+        <span class="tab-icon">🍳</span>
+        <span>Kitchen</span>
+      </button>
+      <button class="tab-btn" data-tab="discover">
+        <span class="tab-icon">🧭</span>
+        <span>Discover</span>
+      </button>
+      <button class="tab-btn" data-tab="mealplan">
+        <span class="tab-icon">📅</span>
+        <span>Meal Plan</span>
+      </button>
+      <button class="tab-btn" data-tab="pantry">
+        <span class="tab-icon">🥫</span>
+        <span>Pantry</span>
+        <span class="tab-badge" id="pantryCountBadge">12</span>
+      </button>
+      <button class="tab-btn" data-tab="shopping">
+        <span class="tab-icon">🛒</span>
+        <span>Shopping List</span>
+        <span class="tab-badge" id="shoppingCountBadge">2</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content Body -->
+  <main class="main-content">
+    
+    <!-- TAB 1: KITCHEN VIEW -->
+    <section id="kitchenView" class="tab-view active">
+      
+      <!-- Greeting Banner -->
+      <div class="greeting-section">
+        <div>
+          <h1 class="greeting-title">Good evening, Chef! 👋</h1>
+          <p class="greeting-subtitle">What's in your kitchen today? We found matching recipes for your ingredients.</p>
+        </div>
+      </div>
+
+      <!-- Kitchen Rescue Alert Banner -->
+      <div class="kitchen-rescue-banner" id="kitchenRescueCard" role="button" tabindex="0">
+        <div class="rescue-left">
+          <div class="rescue-icon-box">🛟</div>
+          <div>
+            <div class="rescue-title">Kitchen Rescue Mode</div>
+            <div class="rescue-desc" id="rescueText">3 ingredients expiring soon: Spinach, Tomatoes, Milk. Rescue them before they spoil!</div>
+          </div>
+        </div>
+        <button class="rescue-btn" id="rescueActionBtn">Rescue with Recipe →</button>
+      </div>
+
+      <!-- Chef's Spotlight Hero Card -->
+      <div class="spotlight-card" id="spotlightCard">
+        <div class="spotlight-image-container">
+          <img id="spotlightImg" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=800&q=80" alt="Chicken Tomato Rice Skillet" class="spotlight-image">
+          <span class="spotlight-badge">Chef's Spotlight</span>
+          <button class="spotlight-favorite-btn" id="spotlightFavBtn" aria-label="Add to favorites">❤️</button>
+        </div>
+        <div class="spotlight-info">
+          <div class="match-pill" id="spotlightMatchBadge">🔥 85% Match • Uses Expiring Items</div>
+          <h2 class="spotlight-title" id="spotlightTitle">Chicken Tomato Rice Skillet</h2>
+          <p class="spotlight-desc" id="spotlightDesc">A comforting one-pot meal featuring golden seared chicken, fragrant basmati rice, caramelized onions, and sweet blistered tomatoes.</p>
+          <div class="recipe-meta-row">
+            <span class="meta-chip">⏱️ <strong id="spotlightTime">28 min</strong></span>
+            <span class="meta-chip">🔥 <strong id="spotlightCalories">420 kcal</strong></span>
+            <span class="meta-chip highlight">⭐ <strong id="spotlightRating">4.8 (215)</strong></span>
+            <span class="meta-chip">🍲 <strong id="spotlightCuisine">Mediterranean</strong></span>
+          </div>
+          <button class="btn-primary-large" id="spotlightCookBtn">
+            <span>View Recipe & Start Cooking</span>
+            <span>→</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Available Ingredients Quick Selector -->
+      <div class="pantry-bar-card">
+        <div class="pantry-bar-header">
+          <div>
+            <h3 class="section-heading">Your Available Ingredients</h3>
+            <p class="section-subheading">Select or type items you have to calculate matching recipes in real-time</p>
+          </div>
+          <div class="ingredient-input-wrapper">
+            <input type="text" id="quickIngredientInput" class="ingredient-input" placeholder="Add ingredient (e.g., Avocado)...">
+            <button id="addQuickIngBtn" class="btn-add-ing">+ Add</button>
+          </div>
+        </div>
+        
+        <div class="ingredient-chips-grid" id="ingredientChipsGrid">
+          <!-- Dynamically populated chips -->
+        </div>
+      </div>
+
+      <!-- Matching Recipes Section -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem;">
+        <h3 class="section-heading">Recipes You Can Cook Right Now</h3>
+        <span id="matchStatsLabel" style="color: var(--text-secondary); font-size: 0.9rem;">Showing top matches</span>
+      </div>
+
+      <div class="recipes-grid" id="matchingRecipesGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 2: DISCOVER VIEW -->
+    <section id="discoverView" class="tab-view">
+      <div class="greeting-section">
+        <div>
+          <h2 class="greeting-title">Explore Recipe Catalog 🧭</h2>
+          <p class="greeting-subtitle">Filter by culinary styles, dietary goals, or prep times.</p>
+        </div>
+      </div>
+
+      <!-- Filter Controls -->
+      <div style="display: flex; flex-direction: column; gap: 0.85rem; margin-bottom: 2rem;">
+        <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem;" id="cuisineFilters">
+          <button class="quick-prompt-chip active" data-cuisine="all">All Cuisines</button>
+          <button class="quick-prompt-chip" data-cuisine="Italian">Italian</button>
+          <button class="quick-prompt-chip" data-cuisine="Mediterranean">Mediterranean</button>
+          <button class="quick-prompt-chip" data-cuisine="Indian">Indian</button>
+          <button class="quick-prompt-chip" data-cuisine="Asian">Asian</button>
+          <button class="quick-prompt-chip" data-cuisine="French">French</button>
+          <button class="quick-prompt-chip" data-cuisine="American">American</button>
+        </div>
+        <div style="display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 0.25rem;" id="dietFilters">
+          <button class="quick-prompt-chip active" data-diet="all">All Diets</button>
+          <button class="quick-prompt-chip" data-diet="High Protein">High Protein</button>
+          <button class="quick-prompt-chip" data-diet="Low Carb">Low Carb</button>
+          <button class="quick-prompt-chip" data-diet="Vegetarian">Vegetarian</button>
+          <button class="quick-prompt-chip" data-diet="Vegan">Vegan</button>
+          <button class="quick-prompt-chip" data-diet="Keto">Keto</button>
+        </div>
+      </div>
+
+      <div class="recipes-grid" id="discoverRecipesGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 3: MEAL PLAN VIEW -->
+    <section id="mealplanView" class="tab-view">
+      <div class="greeting-section">
+        <div>
+          <h2 class="greeting-title">Weekly Meal Planner 📅</h2>
+          <p class="greeting-subtitle">Plan ahead, balance macros, and eliminate cooking fatigue.</p>
+        </div>
+        <button class="btn-primary-large" id="generatePlanBtn" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
+          ✨ Auto-Fill with Pantry
+        </button>
+      </div>
+
+      <div class="meal-plan-grid" id="mealPlanGrid">
+        <!-- Monday - Sunday cards rendered via JS -->
+      </div>
+    </section>
+
+    <!-- TAB 4: PANTRY VIEW -->
+    <section id="pantryView" class="tab-view">
+      <div class="greeting-section">
+        <div>
+          <h2 class="greeting-title">Pantry & Fridge Inventory 🥫</h2>
+          <p class="greeting-subtitle">Track ingredients, expiration status, and stock levels.</p>
+        </div>
+        <button class="btn-primary-large" id="openAddPantryModalBtn" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">
+          + Add New Item
+        </button>
+      </div>
+
+      <div class="pantry-grid-columns" id="pantryCategoryColumns">
+        <!-- Rendered categories -->
+      </div>
+    </section>
+
+    <!-- TAB 5: SHOPPING LIST VIEW -->
+    <section id="shoppingView" class="tab-view">
+      <div class="greeting-section">
+        <div>
+          <h2 class="greeting-title">Smart Shopping List 🛒</h2>
+          <p class="greeting-subtitle">Automatically captures missing recipe items so nothing gets left behind.</p>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button class="btn-secondary" id="clearCompletedShoppingBtn">Clear Completed</button>
+          <button class="btn-primary-large" id="moveToPantryBtn" style="padding: 0.65rem 1.25rem; font-size: 0.9rem;">Add Checked to Pantry</button>
+        </div>
+      </div>
+
+      <div class="shopping-container">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+          <input type="text" id="newShoppingItemInput" class="ingredient-input" placeholder="Add custom item (e.g. Olive Oil)...">
+          <button id="addShoppingItemBtn" class="btn-add-ing">+ Add</button>
+        </div>
+        <div id="shoppingListItems">
+          <!-- Rendered shopping list items -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: RECIPE DETAIL MODAL -->
+  <div class="modal-overlay" id="recipeDetailModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="detailModalTitle">Recipe Title</h3>
+        <button class="modal-close-btn" data-close="recipeDetailModal">✕</button>
+      </div>
+      <div class="modal-body" id="detailModalBody">
+        <!-- Rendered details -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: INTERACTIVE STEP-BY-STEP COOKING MODE -->
+  <div class="modal-overlay" id="cookingModeModal">
+    <div class="modal-container" style="max-width: 680px;">
+      <div class="modal-header">
+        <div>
+          <div class="step-indicator" id="cookingRecipeName">Chicken Tomato Rice Skillet</div>
+          <h3 class="modal-title" style="font-size: 1.15rem;" id="cookingStepCounter">STEP 1 OF 6</h3>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <button class="modal-close-btn" id="speechToggleBtn" title="Speak step aloud">🔊</button>
+          <button class="modal-close-btn" data-close="cookingModeModal">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="cooking-progress-bar-container">
+          <div class="cooking-progress-fill" id="cookingProgressBar"></div>
+        </div>
+
+        <h2 class="step-heading" id="cookingStepTitle">Step 1</h2>
+        <div class="step-instruction" id="cookingStepInstruction">Dice chicken, onion, and fresh tomatoes into bite-sized cubes.</div>
+
+        <!-- Checklist needed for this step -->
+        <div class="step-checklist-card">
+          <div class="checklist-title">Ingredients Needed For This Step</div>
+          <ul class="checklist-items" id="cookingStepChecklist">
+            <!-- Items -->
+          </ul>
+        </div>
+
+        <!-- Optional Timer Widget -->
+        <div class="timer-box" id="cookingTimerContainer" style="display: none;">
+          <div>
+            <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Step Timer</div>
+            <div class="timer-display" id="cookingTimerDisplay">02:00</div>
+          </div>
+          <div class="timer-controls">
+            <button class="btn-secondary" id="timerStartBtn">▶ Start</button>
+            <button class="btn-secondary" id="timerResetBtn">↺ Reset</button>
+          </div>
+        </div>
+
+        <div class="cooking-actions">
+          <button class="btn-secondary" id="cookingPrevBtn">← Previous</button>
+          <button class="btn-primary-large" id="cookingNextBtn">Next Step →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GEMINI AI RECIPE ASSISTANT -->
+  <div class="modal-overlay" id="aiAssistantModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <div class="brand-icon" style="width: 32px; height: 32px; font-size: 1rem;">✨</div>
+          <h3 class="modal-title">Chef Gemini AI Assistant</h3>
+        </div>
+        <button class="modal-close-btn" data-close="aiAssistantModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="ai-chat-container">
+          <div class="ai-messages-scroll" id="aiChatMessages">
+            <div class="ai-message bot">
+              <div class="message-avatar">👨‍🍳</div>
+              <div class="message-bubble">
+                Hello Chef! I'm your AI kitchen assistant. Tell me what's in your pantry, ask for substitutions, or request recipe ideas tailored to your diet!
+              </div>
+            </div>
+          </div>
+
+          <div class="quick-prompts-row">
+            <button class="quick-prompt-chip" data-prompt="What can I cook with Chicken, Garlic and Rice?">🍗 Chicken & Rice dinner</button>
+            <button class="quick-prompt-chip" data-prompt="Quick high-protein breakfast in 10 minutes">⚡ 10m high protein breakfast</button>
+            <button class="quick-prompt-chip" data-prompt="What can I substitute for Heavy Cream?">🥛 Heavy cream substitute</button>
+            <button class="quick-prompt-chip" data-prompt="Give me a healthy low carb dinner idea">🥗 Low carb dinner</button>
+          </div>
+
+          <form id="aiChatForm" class="ai-input-bar">
+            <input type="text" id="aiChatInput" class="ai-text-input" placeholder="Ask Chef Gemini anything (e.g. 'Can I swap butter for oil?')...">
+            <button type="submit" class="btn-ai-send">➔</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
