@@ -372,4 +372,8 @@ class UserPreferencesRepository(
             )
         )
     }
+
+    suspend fun updateUserName(userName: String) {
+        database.userPreferencesDao().updateUserName(userName)
+    }
 }

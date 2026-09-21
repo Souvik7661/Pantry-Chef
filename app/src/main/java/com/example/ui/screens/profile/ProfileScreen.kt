@@ -62,6 +62,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.ui.theme.AmberGoldPrimary
 import com.example.ui.theme.HerbGreen
 import com.example.ui.theme.HoneySaffron
 import com.example.ui.theme.TerracottaPrimary
@@ -76,13 +77,16 @@ import java.util.Locale
 fun ProfileScreen(
     viewModel: MainViewModel,
     onNavigateToDetail: (String) -> Unit,
-    onRestartOnboarding: () -> Unit
+    onRestartOnboarding: () -> Unit,
+    onNavigateToLogin: (() -> Unit)? = null
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val userPrefs by viewModel.userPreferences.collectAsState()
     val cookingHistory by viewModel.cookingHistory.collectAsState()
     val favoriteIds by viewModel.favoriteIds.collectAsState()
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+    val userEmail by viewModel.userEmail.collectAsState()
     val allRecipes = remember { viewModel.recipeRepository.getAllRecipes() }
 
     val favoriteRecipes = remember(favoriteIds, allRecipes) {
@@ -152,6 +156,56 @@ fun ProfileScreen(
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
+                        }
+                    }
+                }
+            }
+
+            // Account & Session Card
+            item {
+                Card(
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = if (isLoggedIn) "Account: Signed In" else "Account: Guest Chef",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = if (isLoggedIn) (userEmail ?: "Active Session") else "Sign in to save custom recipes & preferences across devices",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(12.dp))
+                        if (isLoggedIn) {
+                            OutlinedButton(
+                                onClick = {
+                                    viewModel.logout {
+                                        onNavigateToLogin?.invoke()
+                                    }
+                                },
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text("Sign Out")
+                            }
+                        } else {
+                            Button(
+                                onClick = { onNavigateToLogin?.invoke() },
+                                colors = ButtonDefaults.buttonColors(containerColor = AmberGoldPrimary),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text("Sign In", color = Color(0xFF101012), fontWeight = FontWeight.Bold)
+                            }
                         }
                     }
                 }

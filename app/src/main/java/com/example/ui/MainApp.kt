@@ -66,6 +66,7 @@ import com.example.ui.screens.cooking.CookingModeScreen
 import com.example.ui.screens.detail.RecipeDetailScreen
 import com.example.ui.screens.discover.DiscoverScreen
 import com.example.ui.screens.home.HomeScreen
+import com.example.ui.screens.login.LoginScreen
 import com.example.ui.screens.mealplan.MealPlanScreen
 import com.example.ui.screens.onboarding.OnboardingScreen
 import com.example.ui.screens.pantry.PantryScreen
@@ -272,8 +273,27 @@ fun MainApp(viewModel: MainViewModel) {
             composable(Screen.Splash.route) {
                 SplashScreen(
                     onTimeout = {
-                        navController.navigate(Screen.Home.route) {
+                        val destination = if (viewModel.isLoggedIn.value) Screen.Home.route else Screen.Login.route
+                        navController.navigate(destination) {
                             popUpTo(Screen.Splash.route) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(Screen.Login.route) {
+                LoginScreen(
+                    viewModel = viewModel,
+                    onLoginSuccess = {
+                        val hasCompletedOnboarding = userPrefs?.isOnboarded == true
+                        val nextRoute = if (hasCompletedOnboarding) Screen.Home.route else Screen.Onboarding.route
+                        navController.navigate(nextRoute) {
+                            popUpTo(Screen.Login.route) { inclusive = true }
+                        }
+                    },
+                    onContinueAsGuest = {
+                        navController.navigate(Screen.Home.route) {
+                            popUpTo(Screen.Login.route) { inclusive = true }
                         }
                     }
                 )
@@ -329,7 +349,8 @@ fun MainApp(viewModel: MainViewModel) {
                 ProfileScreen(
                     viewModel = viewModel,
                     onNavigateToDetail = { id -> navController.navigate(Screen.RecipeDetail.createRoute(id)) },
-                    onRestartOnboarding = { navController.navigate(Screen.Onboarding.route) }
+                    onRestartOnboarding = { navController.navigate(Screen.Onboarding.route) },
+                    onNavigateToLogin = { navController.navigate(Screen.Login.route) }
                 )
             }
 

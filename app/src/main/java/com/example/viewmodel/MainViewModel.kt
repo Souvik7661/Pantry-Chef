@@ -244,6 +244,85 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
     private val _aiGeneratedRecipe = MutableStateFlow<Recipe?>(null)
     val aiGeneratedRecipe: StateFlow<Recipe?> = _aiGeneratedRecipe.asStateFlow()
 
+    // Authentication State
+    private val _isLoggedIn = MutableStateFlow(false)
+    val isLoggedIn: StateFlow<Boolean> = _isLoggedIn.asStateFlow()
+
+    private val _userEmail = MutableStateFlow<String?>(null)
+    val userEmail: StateFlow<String?> = _userEmail.asStateFlow()
+
+    private val _authError = MutableStateFlow<String?>(null)
+    val authError: StateFlow<String?> = _authError.asStateFlow()
+
+    fun loginUser(email: String, password: String, rememberMe: Boolean = true, onSuccess: () -> Unit) {
+        if (email.isBlank() || !email.contains("@")) {
+            _authError.value = "Please enter a valid email address"
+            return
+        }
+        if (password.length < 6) {
+            _authError.value = "Password must be at least 6 characters"
+            return
+        }
+        _authError.value = null
+        _isLoggedIn.value = true
+        _userEmail.value = email
+        val chefName = email.substringBefore("@").replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+        viewModelScope.launch {
+            userPreferencesRepository.updateUserName(chefName)
+        }
+        onSuccess()
+    }
+
+    fun signUpUser(name: String, email: String, password: String, onSuccess: () -> Unit) {
+        if (name.isBlank()) {
+            _authError.value = "Please enter your chef name"
+            return
+        }
+        if (email.isBlank() || !email.contains("@")) {
+            _authError.value = "Please enter a valid email address"
+            return
+        }
+        if (password.length < 6) {
+            _authError.value = "Password must be at least 6 characters"
+            return
+        }
+        _authError.value = null
+        _isLoggedIn.value = true
+        _userEmail.value = email
+        viewModelScope.launch {
+            userPreferencesRepository.updateUserName(name.trim())
+        }
+        onSuccess()
+    }
+
+    fun loginWithGoogle(onSuccess: () -> Unit) {
+        _authError.value = null
+        _isLoggedIn.value = true
+        _userEmail.value = "chef.souvik@gmail.com"
+        viewModelScope.launch {
+            userPreferencesRepository.updateUserName("Chef Souvik")
+        }
+        onSuccess()
+    }
+
+    fun loginAsGuest(onSuccess: () -> Unit) {
+        _authError.value = null
+        _isLoggedIn.value = false
+        _userEmail.value = null
+        onSuccess()
+    }
+
+    fun logout(onLogout: () -> Unit) {
+        _isLoggedIn.value = false
+        _userEmail.value = null
+        _authError.value = null
+        onLogout()
+    }
+
+    fun clearAuthError() {
+        _authError.value = null
+    }
+
     // App Updates
     private val _updateInfo = MutableStateFlow(AppUpdateInfo())
     val updateInfo: StateFlow<AppUpdateInfo> = _updateInfo.asStateFlow()

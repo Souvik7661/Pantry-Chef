@@ -127,6 +127,9 @@ interface UserPreferencesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun savePreferences(prefs: UserPreferencesEntity)
+
+    @Query("UPDATE user_preferences SET userName = :name WHERE id = 1")
+    suspend fun updateUserName(name: String)
 }
 
 @Database(
