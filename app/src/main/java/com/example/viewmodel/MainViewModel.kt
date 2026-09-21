@@ -41,7 +41,20 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import org.json.JSONObject
+import java.net.HttpURLConnection
+import java.net.URL
 import java.util.Locale
+
+@Immutable
+data class AppUpdateInfo(
+    val hasUpdate: Boolean = false,
+    val latestVersionName: String = "",
+    val releaseTitle: String = "",
+    val releaseNotes: String = "",
+    val downloadUrl: String = "",
+    val forceUpdate: Boolean = false
+)
 
 @Immutable
 data class ActiveTimer(
@@ -231,6 +244,65 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
     private val _aiGeneratedRecipe = MutableStateFlow<Recipe?>(null)
     val aiGeneratedRecipe: StateFlow<Recipe?> = _aiGeneratedRecipe.asStateFlow()
 
+    // App Updates
+    private val _updateInfo = MutableStateFlow(AppUpdateInfo())
+    val updateInfo: StateFlow<AppUpdateInfo> = _updateInfo.asStateFlow()
+
+    fun dismissUpdateDialog() {
+        _updateInfo.value = _updateInfo.value.copy(hasUpdate = false)
+    }
+
+    private fun getAppVersionCode(): Long {
+        return try {
+            val app = getApplication<Application>()
+            val pInfo = app.packageManager.getPackageInfo(app.packageName, 0)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                pInfo.longVersionCode
+            } else {
+                @Suppress("DEPRECATION")
+                pInfo.versionCode.toLong()
+            }
+        } catch (e: Exception) {
+            1L
+        }
+    }
+
+    fun checkForUpdates(isManualCheck: Boolean = false, onResult: ((hasUpdate: Boolean) -> Unit)? = null) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val url = URL("https://raw.githubusercontent.com/Souvik7661/Pantry-Chef/main/version.json")
+                val connection = (url.openConnection() as HttpURLConnection).apply {
+                    connectTimeout = 4000
+                    readTimeout = 4000
+                    requestMethod = "GET"
+                    setRequestProperty("User-Agent", "PantryChef-Android")
+                }
+                if (connection.responseCode == 200) {
+                    val responseText = connection.inputStream.bufferedReader().use { it.readText() }
+                    val json = JSONObject(responseText)
+                    val remoteVersionCode = json.optLong("versionCode", 1L)
+                    val currentVersionCode = getAppVersionCode()
+                    if (remoteVersionCode > currentVersionCode) {
+                        _updateInfo.value = AppUpdateInfo(
+                            hasUpdate = true,
+                            latestVersionName = json.optString("versionName", "1.1"),
+                            releaseTitle = json.optString("title", "New Update Available! 🚀"),
+                            releaseNotes = json.optString("releaseNotes", "A new version of PantryChef is available."),
+                            downloadUrl = json.optString("downloadUrl", "https://github.com/Souvik7661/Pantry-Chef/releases/download/v1.0.0/PantryChef.apk")
+                        )
+                        onResult?.invoke(true)
+                    } else {
+                        onResult?.invoke(false)
+                    }
+                } else {
+                    onResult?.invoke(false)
+                }
+            } catch (e: Exception) {
+                onResult?.invoke(false)
+            }
+        }
+    }
+
     init {
         // Initialize TTS
         try {
@@ -243,6 +315,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
         viewModelScope.launch {
             pantryRepository.seedDefaultPantryIfEmpty()
         }
+
+        // Automatically check for app updates on startup
+        checkForUpdates()
     }
 
     override fun onInit(status: Int) {
