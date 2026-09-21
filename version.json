@@ -1,7 +1,7 @@
 {
   "versionCode": 2,
-  "versionName": "1.1.0",
-  "title": "PantryChef Update Available! 🌍🚀",
-  "releaseNotes": "• 15 New Authentic World Recipes (Tikka Masala, Spaghetti Aglio e Olio, Paella, Pho Ga, Bibimbap, Tacos, etc.)\n• 40+ New Pantry Ingredients added to pantry selector\n• Automatic update detection\n• Cooking timer and step stability improvements",
-  "downloadUrl": "https://github.com/Souvik7661/Pantry-Chef/releases/download/v1.0.0/PantryChef.apk"
+  "versionName": "1.2.0",
+  "title": "PantryChef Update Available! 🤖🍲",
+  "releaseNotes": "• Mr. Foodie Animated Mascot holding 'ASK ME' sign\n• 'Ask Me' AI section powered by Ollama Intelligence\n• Empty default kitchen selection (choose your ingredients)\n• Personalized Greeting: 'Hi ! my name is Mr. Foodie . How may i assist you <Name>'\n• 15 New World Recipes (Tikka Masala, Spaghetti Aglio e Olio, Paella, Pho Ga, etc.)\n• Bug fixes & UI enhancements",
+  "downloadUrl": "https://github.com/Souvik7661/Pantry-Chef/raw/main/PantryChef.apk"
 }
