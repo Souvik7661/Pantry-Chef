@@ -260,6 +260,1316 @@ const RECIPES_DATA = [
       { stepNumber: 5, text: "Remove from heat, sprinkle cheddar cheese, and let melt for 30 seconds before plating.", timer: 30 }
     ]
   }
+,
+  {
+    "id": "rec_31",
+    "title": "Chicken Tikka Masala",
+    "description": "Tender tandoori-style chicken simmered in a rich, aromatic tomato and cream sauce.",
+    "imageUrl": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Indian",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 35,
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.8,
+    "reviewsCount": 342,
+    "nutrition": {
+      "calories": 520,
+      "protein": 43,
+      "carbs": 18,
+      "fat": 29
+    },
+    "tags": [
+      "Indian",
+      "Comfort Food",
+      "High Protein",
+      "Authentic"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "amount": 600,
+        "unit": "g"
+      },
+      {
+        "name": "Plain Yogurt",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Tomato Puree",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Heavy Cream",
+        "amount": 100,
+        "unit": "ml"
+      },
+      {
+        "name": "Garam Masala",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Garlic",
+        "amount": 4,
+        "unit": "cloves"
+      },
+      {
+        "name": "Ginger",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Marinate chicken with yogurt, ginger, garlic, garam masala, salt, and chili powder.",
+        "timer": 1800
+      },
+      {
+        "stepNumber": 2,
+        "text": "Sear the marinated chicken in a hot pan until browned on all sides.",
+        "timer": 480
+      },
+      {
+        "stepNumber": 3,
+        "text": "Cook tomato puree with spices until the sauce becomes thick and glossy.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 4,
+        "text": "Add chicken and cream, then simmer gently until the chicken is cooked through.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 5,
+        "text": "Garnish with fresh cilantro and serve with basmati rice or naan.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_32",
+    "title": "Spaghetti Aglio e Olio",
+    "description": "A classic Roman-style pasta combining spaghetti, golden garlic, olive oil, chili, and parsley.",
+    "imageUrl": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Italian",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 5,
+    "cookTimeMinutes": 15,
+    "servings": 2,
+    "difficulty": "Easy",
+    "rating": 4.7,
+    "reviewsCount": 287,
+    "nutrition": {
+      "calories": 610,
+      "protein": 16,
+      "carbs": 78,
+      "fat": 27
+    },
+    "tags": [
+      "Italian",
+      "Quick",
+      "Vegetarian",
+      "Classic"
+    ],
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Extra Virgin Olive Oil",
+        "amount": 60,
+        "unit": "ml"
+      },
+      {
+        "name": "Garlic",
+        "amount": 5,
+        "unit": "cloves"
+      },
+      {
+        "name": "Red Chili Flakes",
+        "amount": 1,
+        "unit": "tsp"
+      },
+      {
+        "name": "Fresh Parsley",
+        "amount": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Cook spaghetti in well-salted boiling water until al dente. Reserve some pasta water.",
+        "timer": 540
+      },
+      {
+        "stepNumber": 2,
+        "text": "Warm olive oil over low heat and gently fry sliced garlic until lightly golden.",
+        "timer": 180
+      },
+      {
+        "stepNumber": 3,
+        "text": "Add chili flakes and briefly toast them in the garlic oil.",
+        "timer": 30
+      },
+      {
+        "stepNumber": 4,
+        "text": "Toss in spaghetti and enough pasta water to create a glossy emulsion.",
+        "timer": 120
+      },
+      {
+        "stepNumber": 5,
+        "text": "Finish with parsley and serve immediately.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_33",
+    "title": "Chicken Tacos",
+    "description": "Juicy spiced chicken tucked into warm corn tortillas with fresh salsa, lime, and cilantro.",
+    "imageUrl": "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Mexican",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "rating": 4.9,
+    "reviewsCount": 421,
+    "nutrition": {
+      "calories": 430,
+      "protein": 35,
+      "carbs": 38,
+      "fat": 17
+    },
+    "tags": [
+      "Mexican",
+      "Quick Dinners",
+      "Street Food",
+      "High Protein"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Thighs",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Corn Tortillas",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "Tomato",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Red Onion",
+        "amount": 0.5,
+        "unit": "pcs"
+      },
+      {
+        "name": "Lime",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Ground Cumin",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Season chicken with cumin, chili powder, salt, pepper, and lime juice.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 2,
+        "text": "Cook chicken in a hot skillet until browned and fully cooked.",
+        "timer": 720
+      },
+      {
+        "stepNumber": 3,
+        "text": "Dice tomato and onion and mix with lime juice, salt, and cilantro to make a fresh salsa.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 4,
+        "text": "Warm tortillas on a dry skillet until soft and lightly charred.",
+        "timer": 90
+      },
+      {
+        "stepNumber": 5,
+        "text": "Slice chicken and assemble tacos with salsa and fresh lime.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_34",
+    "title": "Chicken Teriyaki Bowl",
+    "description": "Japanese-inspired glazed chicken served over steamed rice with crisp vegetables and sesame.",
+    "imageUrl": "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Japanese",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 20,
+    "servings": 3,
+    "difficulty": "Easy",
+    "rating": 4.8,
+    "reviewsCount": 315,
+    "nutrition": {
+      "calories": 570,
+      "protein": 39,
+      "carbs": 67,
+      "fat": 16
+    },
+    "tags": [
+      "Japanese",
+      "Meal Prep",
+      "High Protein",
+      "Rice Bowl"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Thighs",
+        "amount": 450,
+        "unit": "g"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Honey",
+        "amount": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Cooked White Rice",
+        "amount": 450,
+        "unit": "g"
+      },
+      {
+        "name": "Broccoli",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Sesame Seeds",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Mix soy sauce, honey, ginger, garlic, and a splash of water to make the teriyaki sauce.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 2,
+        "text": "Sear chicken pieces in a hot skillet until browned and nearly cooked through.",
+        "timer": 480
+      },
+      {
+        "stepNumber": 3,
+        "text": "Pour in the teriyaki sauce and simmer until thick and glossy.",
+        "timer": 240
+      },
+      {
+        "stepNumber": 4,
+        "text": "Steam or saut\u00e9 broccoli until bright green and tender-crisp.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 5,
+        "text": "Serve chicken and broccoli over rice and garnish with sesame seeds.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_35",
+    "title": "Thai Green Curry",
+    "description": "A fragrant Thai curry with coconut milk, green curry paste, vegetables, and tender chicken.",
+    "imageUrl": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Thai",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 25,
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.8,
+    "reviewsCount": 268,
+    "nutrition": {
+      "calories": 490,
+      "protein": 36,
+      "carbs": 18,
+      "fat": 31
+    },
+    "tags": [
+      "Thai",
+      "Curry",
+      "Coconut",
+      "Gluten Free"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Coconut Milk",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "Green Curry Paste",
+        "amount": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Bell Pepper",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "Thai Basil",
+        "amount": 20,
+        "unit": "g"
+      },
+      {
+        "name": "Fish Sauce",
+        "amount": 1.5,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Heat a little oil and fry the green curry paste until fragrant.",
+        "timer": 120
+      },
+      {
+        "stepNumber": 2,
+        "text": "Add coconut milk and bring the curry to a gentle simmer.",
+        "timer": 180
+      },
+      {
+        "stepNumber": 3,
+        "text": "Add sliced chicken and cook gently until nearly done.",
+        "timer": 480
+      },
+      {
+        "stepNumber": 4,
+        "text": "Add bell pepper and fish sauce and simmer until the vegetables are tender-crisp.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 5,
+        "text": "Stir in Thai basil and serve hot with jasmine rice.",
+        "timer": 30
+      }
+    ]
+  },
+  {
+    "id": "rec_36",
+    "title": "French Ratatouille",
+    "description": "A rustic Proven\u00e7al vegetable stew layered with tomatoes, zucchini, eggplant, peppers, and herbs.",
+    "imageUrl": "https://images.unsplash.com/photo-1572453800999-e8d2d1589b7c?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "French",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 45,
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.6,
+    "reviewsCount": 198,
+    "nutrition": {
+      "calories": 290,
+      "protein": 7,
+      "carbs": 30,
+      "fat": 18
+    },
+    "tags": [
+      "French",
+      "Vegetarian",
+      "Vegan",
+      "Mediterranean"
+    ],
+    "ingredients": [
+      {
+        "name": "Eggplant",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Zucchini",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatoes",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Bell Pepper",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 4,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Fresh Thyme",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Cut all vegetables into evenly sized pieces.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 2,
+        "text": "Saut\u00e9 eggplant and zucchini separately until lightly browned, then set aside.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 3,
+        "text": "Saut\u00e9 onion and bell pepper until softened, then add garlic.",
+        "timer": 360
+      },
+      {
+        "stepNumber": 4,
+        "text": "Add tomatoes, herbs, eggplant, and zucchini. Cover and simmer gently.",
+        "timer": 1500
+      },
+      {
+        "stepNumber": 5,
+        "text": "Season with salt and pepper and finish with fresh herbs and olive oil.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_37",
+    "title": "Spanish Chicken Paella",
+    "description": "Saffron-infused Spanish rice cooked with tender chicken, peppers, peas, and aromatic spices.",
+    "imageUrl": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Spanish",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 40,
+    "servings": 4,
+    "difficulty": "Hard",
+    "rating": 4.9,
+    "reviewsCount": 376,
+    "nutrition": {
+      "calories": 590,
+      "protein": 39,
+      "carbs": 69,
+      "fat": 16
+    },
+    "tags": [
+      "Spanish",
+      "Paella",
+      "One Pan",
+      "Authentic"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Thighs",
+        "amount": 500,
+        "unit": "g"
+      },
+      {
+        "name": "Paella Rice",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Saffron",
+        "amount": 0.2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Red Bell Pepper",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "Chicken Stock",
+        "amount": 750,
+        "unit": "ml"
+      },
+      {
+        "name": "Green Peas",
+        "amount": 100,
+        "unit": "g"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Season chicken and sear it in a wide paella pan until deeply browned.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 2,
+        "text": "Saut\u00e9 onion, garlic, and red pepper until softened.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 3,
+        "text": "Stir in rice and paprika, coating every grain with the aromatic oil.",
+        "timer": 120
+      },
+      {
+        "stepNumber": 4,
+        "text": "Add saffron-infused stock and arrange chicken over the rice. Do not stir after this point.",
+        "timer": 1200
+      },
+      {
+        "stepNumber": 5,
+        "text": "Add peas near the end and rest the paella before serving with lemon wedges.",
+        "timer": 300
+      }
+    ]
+  },
+  {
+    "id": "rec_38",
+    "title": "Greek Chicken Souvlaki",
+    "description": "Lemony Greek chicken skewers marinated with garlic, oregano, olive oil, and served with fresh salad.",
+    "imageUrl": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Greek",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 15,
+    "servings": 4,
+    "difficulty": "Easy",
+    "rating": 4.8,
+    "reviewsCount": 251,
+    "nutrition": {
+      "calories": 480,
+      "protein": 45,
+      "carbs": 31,
+      "fat": 20
+    },
+    "tags": [
+      "Greek",
+      "Mediterranean",
+      "High Protein",
+      "Grilled"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "amount": 600,
+        "unit": "g"
+      },
+      {
+        "name": "Olive Oil",
+        "amount": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Lemon Juice",
+        "amount": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Dried Oregano",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Garlic",
+        "amount": 3,
+        "unit": "cloves"
+      },
+      {
+        "name": "Pita Bread",
+        "amount": 4,
+        "unit": "pcs"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Combine olive oil, lemon juice, garlic, oregano, salt, and pepper.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 2,
+        "text": "Add chicken pieces and marinate thoroughly.",
+        "timer": 1800
+      },
+      {
+        "stepNumber": 3,
+        "text": "Thread chicken onto skewers and grill over high heat until browned and cooked through.",
+        "timer": 720
+      },
+      {
+        "stepNumber": 4,
+        "text": "Warm pita bread and prepare tomato, cucumber, onion, and tzatziki.",
+        "timer": 120
+      },
+      {
+        "stepNumber": 5,
+        "text": "Serve chicken skewers with pita, tzatziki, salad, and lemon.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_39",
+    "title": "Kung Pao Chicken",
+    "description": "A Sichuan-inspired stir-fry featuring tender chicken, dried chilies, peanuts, and a savory tangy sauce.",
+    "imageUrl": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Chinese",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 15,
+    "servings": 3,
+    "difficulty": "Medium",
+    "rating": 4.7,
+    "reviewsCount": 219,
+    "nutrition": {
+      "calories": 520,
+      "protein": 42,
+      "carbs": 25,
+      "fat": 27
+    },
+    "tags": [
+      "Chinese",
+      "Sichuan",
+      "Spicy",
+      "Stir Fry"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Breast",
+        "amount": 450,
+        "unit": "g"
+      },
+      {
+        "name": "Roasted Peanuts",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Dried Red Chilies",
+        "amount": 8,
+        "unit": "pcs"
+      },
+      {
+        "name": "Soy Sauce",
+        "amount": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Rice Vinegar",
+        "amount": 1,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Sichuan Peppercorns",
+        "amount": 1,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Cut chicken into bite-sized pieces and toss with soy sauce and cornstarch.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 2,
+        "text": "Mix soy sauce, rice vinegar, sugar, and a little water for the stir-fry sauce.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 3,
+        "text": "Heat a wok until very hot and stir-fry chicken until lightly browned.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 4,
+        "text": "Add dried chilies, Sichuan peppercorns, garlic, and ginger and stir-fry until fragrant.",
+        "timer": 90
+      },
+      {
+        "stepNumber": 5,
+        "text": "Return chicken to the wok, add sauce and peanuts, and toss until glossy.",
+        "timer": 120
+      }
+    ]
+  },
+  {
+    "id": "rec_40",
+    "title": "Chicken Shawarma Plate",
+    "description": "Middle Eastern spiced chicken served with creamy tahini, fresh vegetables, herbs, and warm flatbread.",
+    "imageUrl": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Middle Eastern",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 25,
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.9,
+    "reviewsCount": 389,
+    "nutrition": {
+      "calories": 510,
+      "protein": 44,
+      "carbs": 24,
+      "fat": 27
+    },
+    "tags": [
+      "Middle Eastern",
+      "Shawarma",
+      "High Protein",
+      "Street Food"
+    ],
+    "ingredients": [
+      {
+        "name": "Chicken Thighs",
+        "amount": 600,
+        "unit": "g"
+      },
+      {
+        "name": "Plain Yogurt",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Tahini",
+        "amount": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Lemon Juice",
+        "amount": 3,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Ground Cumin",
+        "amount": 2,
+        "unit": "tsp"
+      },
+      {
+        "name": "Paprika",
+        "amount": 2,
+        "unit": "tsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Mix yogurt, lemon juice, garlic, cumin, paprika, coriander, and salt.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 2,
+        "text": "Coat chicken thoroughly with the marinade and refrigerate.",
+        "timer": 1800
+      },
+      {
+        "stepNumber": 3,
+        "text": "Roast or pan-sear chicken over high heat until browned and cooked through.",
+        "timer": 900
+      },
+      {
+        "stepNumber": 4,
+        "text": "Whisk tahini with lemon juice, water, and salt to make a smooth sauce.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 5,
+        "text": "Slice chicken and serve with tahini, cucumber, tomato, herbs, and warm flatbread.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_41",
+    "title": "Classic American Cheeseburger",
+    "description": "A juicy beef patty layered with melted cheddar, crisp lettuce, tomato, onion, and a toasted bun.",
+    "imageUrl": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "American",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 10,
+    "cookTimeMinutes": 15,
+    "servings": 2,
+    "difficulty": "Easy",
+    "rating": 4.7,
+    "reviewsCount": 512,
+    "nutrition": {
+      "calories": 680,
+      "protein": 42,
+      "carbs": 43,
+      "fat": 38
+    },
+    "tags": [
+      "American",
+      "Burger",
+      "Comfort Food",
+      "High Protein"
+    ],
+    "ingredients": [
+      {
+        "name": "Ground Beef",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Burger Buns",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Cheddar Cheese",
+        "amount": 2,
+        "unit": "slices"
+      },
+      {
+        "name": "Lettuce",
+        "amount": 2,
+        "unit": "slices"
+      },
+      {
+        "name": "Tomato",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "Onion",
+        "amount": 0.5,
+        "unit": "pcs"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Divide beef into two portions and gently shape into patties.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 2,
+        "text": "Season generously with salt and pepper.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 3,
+        "text": "Sear patties in a very hot skillet until browned and cooked to your preferred doneness.",
+        "timer": 480
+      },
+      {
+        "stepNumber": 4,
+        "text": "Place cheddar on the patties and cover briefly until melted.",
+        "timer": 60
+      },
+      {
+        "stepNumber": 5,
+        "text": "Toast buns and assemble with lettuce, tomato, onion, and burger sauce.",
+        "timer": 120
+      }
+    ]
+  },
+  {
+    "id": "rec_42",
+    "title": "Vietnamese Pho Ga",
+    "description": "A fragrant Vietnamese chicken noodle soup with aromatic broth, rice noodles, herbs, and fresh lime.",
+    "imageUrl": "https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Vietnamese",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 20,
+    "cookTimeMinutes": 60,
+    "servings": 4,
+    "difficulty": "Hard",
+    "rating": 4.9,
+    "reviewsCount": 334,
+    "nutrition": {
+      "calories": 420,
+      "protein": 38,
+      "carbs": 46,
+      "fat": 11
+    },
+    "tags": [
+      "Vietnamese",
+      "Soup",
+      "Comfort Food",
+      "High Protein"
+    ],
+    "ingredients": [
+      {
+        "name": "Whole Chicken",
+        "amount": 1.2,
+        "unit": "kg"
+      },
+      {
+        "name": "Rice Noodles",
+        "amount": 300,
+        "unit": "g"
+      },
+      {
+        "name": "Onion",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "Fresh Ginger",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Star Anise",
+        "amount": 3,
+        "unit": "pcs"
+      },
+      {
+        "name": "Fish Sauce",
+        "amount": 2,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Char onion and ginger over an open flame or dry skillet until deeply browned.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 2,
+        "text": "Simmer chicken with water, onion, ginger, star anise, cinnamon, and salt.",
+        "timer": 2400
+      },
+      {
+        "stepNumber": 3,
+        "text": "Remove chicken, shred the meat, and strain the broth.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 4,
+        "text": "Cook rice noodles according to package instructions and drain.",
+        "timer": 240
+      },
+      {
+        "stepNumber": 5,
+        "text": "Place noodles and chicken in bowls, pour over hot broth, and finish with herbs, lime, and chili.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_43",
+    "title": "Korean Bibimbap",
+    "description": "A colorful Korean rice bowl topped with seasoned vegetables, fried egg, gochujang, and sesame.",
+    "imageUrl": "https://images.unsplash.com/photo-1553163147-622ab57be1c7?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Korean",
+    "mealTypes": [
+      "Lunch",
+      "Dinner"
+    ],
+    "prepTimeMinutes": 25,
+    "cookTimeMinutes": 20,
+    "servings": 2,
+    "difficulty": "Medium",
+    "rating": 4.9,
+    "reviewsCount": 294,
+    "nutrition": {
+      "calories": 610,
+      "protein": 38,
+      "carbs": 68,
+      "fat": 21
+    },
+    "tags": [
+      "Korean",
+      "Rice Bowl",
+      "High Protein",
+      "Colorful"
+    ],
+    "ingredients": [
+      {
+        "name": "Cooked Short Grain Rice",
+        "amount": 350,
+        "unit": "g"
+      },
+      {
+        "name": "Thinly Sliced Beef",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Spinach",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Carrot",
+        "amount": 1,
+        "unit": "pcs"
+      },
+      {
+        "name": "Mushrooms",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Gochujang",
+        "amount": 2,
+        "unit": "tbsp"
+      },
+      {
+        "name": "Egg",
+        "amount": 2,
+        "unit": "pcs"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Season beef with soy sauce, sesame oil, garlic, and a little sugar.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 2,
+        "text": "Cook spinach briefly, squeeze out excess water, and season with sesame oil and salt.",
+        "timer": 120
+      },
+      {
+        "stepNumber": 3,
+        "text": "Saut\u00e9 carrot and mushrooms separately until tender but still slightly crisp.",
+        "timer": 360
+      },
+      {
+        "stepNumber": 4,
+        "text": "Stir-fry marinated beef until browned and cooked through.",
+        "timer": 300
+      },
+      {
+        "stepNumber": 5,
+        "text": "Arrange rice, vegetables, beef, and a fried egg in bowls. Add gochujang and sesame seeds.",
+        "timer": 180
+      }
+    ]
+  },
+  {
+    "id": "rec_44",
+    "title": "Avocado Toast with Poached Egg",
+    "description": "Creamy smashed avocado on crisp toast topped with a perfectly poached egg and chili flakes.",
+    "imageUrl": "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "American",
+    "mealTypes": [
+      "Breakfast",
+      "Brunch"
+    ],
+    "prepTimeMinutes": 10,
+    "cookTimeMinutes": 8,
+    "servings": 2,
+    "difficulty": "Easy",
+    "rating": 4.6,
+    "reviewsCount": 185,
+    "nutrition": {
+      "calories": 390,
+      "protein": 15,
+      "carbs": 32,
+      "fat": 25
+    },
+    "tags": [
+      "Breakfast",
+      "Brunch",
+      "Vegetarian",
+      "Quick"
+    ],
+    "ingredients": [
+      {
+        "name": "Avocado",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Sourdough Bread",
+        "amount": 2,
+        "unit": "slices"
+      },
+      {
+        "name": "Eggs",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Chili Flakes",
+        "amount": 0.5,
+        "unit": "tsp"
+      },
+      {
+        "name": "Lemon Juice",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Toast sourdough until crisp and golden.",
+        "timer": 180
+      },
+      {
+        "stepNumber": 2,
+        "text": "Mash avocado with lemon juice, salt, and pepper.",
+        "timer": 0
+      },
+      {
+        "stepNumber": 3,
+        "text": "Poach eggs in gently simmering water until the whites are set and yolks remain runny.",
+        "timer": 210
+      },
+      {
+        "stepNumber": 4,
+        "text": "Spread avocado over toast and top with poached eggs and chili flakes.",
+        "timer": 0
+      }
+    ]
+  },
+  {
+    "id": "rec_45",
+    "title": "Mango Sticky Rice",
+    "description": "A beloved Thai dessert pairing sweet coconut-infused sticky rice with ripe juicy mango.",
+    "imageUrl": "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80",
+    "cuisine": "Thai",
+    "mealTypes": [
+      "Dessert"
+    ],
+    "prepTimeMinutes": 15,
+    "cookTimeMinutes": 30,
+    "servings": 4,
+    "difficulty": "Medium",
+    "rating": 4.8,
+    "reviewsCount": 276,
+    "nutrition": {
+      "calories": 430,
+      "protein": 5,
+      "carbs": 76,
+      "fat": 13
+    },
+    "tags": [
+      "Thai",
+      "Dessert",
+      "Vegan",
+      "Gluten Free"
+    ],
+    "ingredients": [
+      {
+        "name": "Glutinous Rice",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Coconut Milk",
+        "amount": 400,
+        "unit": "ml"
+      },
+      {
+        "name": "Ripe Mango",
+        "amount": 2,
+        "unit": "pcs"
+      },
+      {
+        "name": "Sugar",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Sesame Seeds",
+        "amount": 1,
+        "unit": "tbsp"
+      }
+    ],
+    "steps": [
+      {
+        "stepNumber": 1,
+        "text": "Rinse glutinous rice until the water runs mostly clear, then soak.",
+        "timer": 1200
+      },
+      {
+        "stepNumber": 2,
+        "text": "Steam the soaked rice until tender and translucent.",
+        "timer": 1200
+      },
+      {
+        "stepNumber": 3,
+        "text": "Warm coconut milk with sugar and salt without allowing it to boil.",
+        "timer": 180
+      },
+      {
+        "stepNumber": 4,
+        "text": "Pour most of the warm coconut mixture over the sticky rice and let it absorb.",
+        "timer": 600
+      },
+      {
+        "stepNumber": 5,
+        "text": "Serve sticky rice with sliced ripe mango and drizzle with the remaining coconut sauce.",
+        "timer": 0
+      }
+    ]
+  }
 ];
 
 const DEFAULT_PANTRY = [
