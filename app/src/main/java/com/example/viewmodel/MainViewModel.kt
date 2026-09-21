@@ -23,6 +23,7 @@ import com.example.data.model.Recipe
 import com.example.data.model.RecipeIngredient
 import com.example.data.model.RecipeMatchResult
 import com.example.data.remote.GeminiCookingService
+import com.example.data.remote.OllamaCookingService
 import com.example.data.repository.MealPlanRepository
 import com.example.data.repository.PantryRepository
 import com.example.data.repository.RecipeRepository
@@ -45,6 +46,15 @@ import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 import java.util.Locale
+import java.util.UUID
+
+@Immutable
+data class MrFoodieMessage(
+    val id: String = UUID.randomUUID().toString(),
+    val text: String,
+    val isFromUser: Boolean,
+    val timestamp: Long = System.currentTimeMillis()
+)
 
 @Immutable
 data class AppUpdateInfo(
@@ -125,10 +135,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
         recipeRepository.getCookingHistory()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    // Current Search & Matching
-    private val _selectedIngredients = MutableStateFlow<List<String>>(
-        listOf("Chicken", "Tomato", "Onion", "Garlic", "Rice")
-    )
+    // Current Search & Matching (Starts empty so user chooses their own ingredients)
+    private val _selectedIngredients = MutableStateFlow<List<String>>(emptyList())
     val selectedIngredients: StateFlow<List<String>> = _selectedIngredients.asStateFlow()
 
     private val _filterState = MutableStateFlow(FilterState())
@@ -145,6 +153,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
         _searchQuery,
         userPreferences
     ) { ingredients, expiring, filters, query, prefs ->
+        // When user hasn't chosen anything yet, don't show arbitrary matches
+        if (ingredients.isEmpty() && query.isBlank() && filters.cuisine == "All" && filters.mealType == null && filters.dietaryFilters.isEmpty()) {
+            return@combine emptyList<RecipeMatchResult>()
+        }
+
         val userAllergies = prefs?.allergiesCsv?.split(",")?.filter { it.isNotBlank() } ?: emptyList()
         val userDiet = prefs?.dietaryPreferencesCsv?.split(",")?.filter { it.isNotBlank() } ?: emptyList()
 
@@ -243,6 +256,90 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
 
     private val _aiGeneratedRecipe = MutableStateFlow<Recipe?>(null)
     val aiGeneratedRecipe: StateFlow<Recipe?> = _aiGeneratedRecipe.asStateFlow()
+
+    // Mr. Foodie Ollama Assistant State
+    private val _foodieChatMessages = MutableStateFlow<List<MrFoodieMessage>>(emptyList())
+    val foodieChatMessages: StateFlow<List<MrFoodieMessage>> = _foodieChatMessages.asStateFlow()
+
+    private val _isFoodieThinking = MutableStateFlow(false)
+    val isFoodieThinking: StateFlow<Boolean> = _isFoodieThinking.asStateFlow()
+
+    private val _ollamaModelName = MutableStateFlow(OllamaCookingService.preferredModel)
+    val ollamaModelName: StateFlow<String> = _ollamaModelName.asStateFlow()
+
+    private val _ollamaHostUrl = MutableStateFlow(OllamaCookingService.hostUrl)
+    val ollamaHostUrl: StateFlow<String> = _ollamaHostUrl.asStateFlow()
+
+    fun updateOllamaHost(newHost: String) {
+        val trimmed = newHost.trim().removeSuffix("/")
+        if (trimmed.isNotBlank()) {
+            OllamaCookingService.hostUrl = trimmed
+            _ollamaHostUrl.value = trimmed
+            viewModelScope.launch {
+                val models = OllamaCookingService.checkConnectionAndGetModels()
+                if (models.isNotEmpty()) {
+                    _ollamaModelName.value = OllamaCookingService.preferredModel
+                }
+            }
+        }
+    }
+
+    fun initFoodieGreeting(userName: String) {
+        if (_foodieChatMessages.value.isEmpty()) {
+            val greetingMsg = MrFoodieMessage(
+                text = "Hi ! my name is Mr. Foodie . How may i assist you $userName",
+                isFromUser = false
+            )
+            _foodieChatMessages.value = listOf(greetingMsg)
+        }
+        viewModelScope.launch {
+            val models = OllamaCookingService.checkConnectionAndGetModels()
+            if (models.isNotEmpty()) {
+                _ollamaModelName.value = OllamaCookingService.preferredModel
+            }
+        }
+    }
+
+    fun askMrFoodie(question: String) {
+        val q = question.trim()
+        if (q.isBlank()) return
+        val currentName = userPreferences.value?.userName ?: "Chef"
+        val userMsg = MrFoodieMessage(text = q, isFromUser = true)
+        _foodieChatMessages.value = _foodieChatMessages.value + userMsg
+
+        viewModelScope.launch {
+            _isFoodieThinking.value = true
+            try {
+                val history = _foodieChatMessages.value.map {
+                    (if (it.isFromUser) "user" else "assistant") to it.text
+                }
+                val answer = OllamaCookingService.askMrFoodie(
+                    question = q,
+                    userName = currentName,
+                    history = history
+                )
+                val botMsg = MrFoodieMessage(text = answer, isFromUser = false)
+                _foodieChatMessages.value = _foodieChatMessages.value + botMsg
+            } catch (e: Exception) {
+                val errorMsg = MrFoodieMessage(
+                    text = "Oops! I encountered an error while cooking up an answer. Please check if Ollama is running or try again.",
+                    isFromUser = false
+                )
+                _foodieChatMessages.value = _foodieChatMessages.value + errorMsg
+            } finally {
+                _isFoodieThinking.value = false
+            }
+        }
+    }
+
+    fun clearFoodieChat(userName: String) {
+        _foodieChatMessages.value = listOf(
+            MrFoodieMessage(
+                text = "Hi ! my name is Mr. Foodie . How may i assist you $userName",
+                isFromUser = false
+            )
+        )
+    }
 
     // Authentication State
     private val _isLoggedIn = MutableStateFlow(false)
@@ -476,16 +573,28 @@ class MainViewModel(application: Application) : AndroidViewModel(application), T
                 val prefs = userPreferences.value
                 val userAllergies = prefs?.allergiesCsv?.split(",")?.filter { it.isNotBlank() } ?: emptyList()
                 val userDiet = prefs?.dietaryPreferencesCsv?.split(",")?.filter { it.isNotBlank() } ?: emptyList()
+                val currentName = prefs?.userName ?: "Chef"
 
-                val recipe = GeminiCookingService.generateRecipeWithAI(
-                    userIngredients = ingredients,
-                    dietaryPreferences = userDiet,
-                    allergies = userAllergies,
-                    customInstruction = modification
+                // Attempt generation with Ollama local model first
+                val ollamaRecipe = OllamaCookingService.generateRecipeWithOllama(
+                    userIngredients = if (ingredients.isNotEmpty()) ingredients else listOf("Chicken", "Rice", "Tomato"),
+                    customInstruction = modification,
+                    userName = currentName
                 )
-                _aiGeneratedRecipe.value = recipe
+
+                if (ollamaRecipe != null) {
+                    _aiGeneratedRecipe.value = ollamaRecipe
+                } else {
+                    val recipe = GeminiCookingService.generateRecipeWithAI(
+                        userIngredients = ingredients,
+                        dietaryPreferences = userDiet,
+                        allergies = userAllergies,
+                        customInstruction = modification
+                    )
+                    _aiGeneratedRecipe.value = recipe
+                }
             } catch (e: Exception) {
-                // Handled gracefully in service
+                // Handled gracefully
             } finally {
                 _isGeneratingAi.value = false
             }

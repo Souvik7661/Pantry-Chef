@@ -41,9 +41,9 @@
       <div class="header-actions">
         <a href="https://github.com/Souvik7661/Pantry-Chef/releases/download/v1.0.0/PantryChef.apk" class="btn-primary-large" style="padding: 0.5rem 0.85rem; font-size: 0.78rem; text-decoration: none; border-radius: var(--radius-full);" download title="Download Android APK">🤖 Android APK</a>
         <button id="replaySplashBtn" class="btn-secondary" style="padding: 0.5rem 0.85rem; font-size: 0.8rem; border-radius: var(--radius-full);" title="View Opening Screen">🎬 Intro</button>
-        <button id="openAiAssistantBtn" class="btn-ai-assistant" aria-label="Open AI Chef Assistant">
-          <span class="sparkle">✨</span>
-          <span>Ask AI Chef</span>
+        <button id="openAiAssistantBtn" class="btn-ai-assistant" aria-label="Ask Me" style="display: flex; align-items: center; gap: 6px;">
+          <img src="img_mr_foodie_robot.jpg" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-gold);" alt="Mr. Foodie">
+          <span>Ask Me</span>
         </button>
       </div>
     </div>
@@ -334,13 +334,16 @@
     </div>
   </div>
 
-  <!-- MODAL: GEMINI AI RECIPE ASSISTANT -->
+  <!-- MODAL: MR. FOODIE AI KITCHEN ASSISTANT -->
   <div class="modal-overlay" id="aiAssistantModal">
     <div class="modal-container">
       <div class="modal-header">
         <div style="display: flex; align-items: center; gap: 0.65rem;">
-          <div class="brand-icon" style="width: 32px; height: 32px; font-size: 1rem;">✨</div>
-          <h3 class="modal-title">Chef Gemini AI Assistant</h3>
+          <img src="img_mr_foodie_robot.jpg" style="width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent-gold);" alt="Mr. Foodie">
+          <div>
+            <h3 class="modal-title">Ask Me (Mr. Foodie)</h3>
+            <span style="font-size: 0.72rem; color: var(--accent-gold); font-weight: 600;">🧠 Powered by Ollama AI</span>
+          </div>
         </div>
         <button class="modal-close-btn" data-close="aiAssistantModal">✕</button>
       </div>
@@ -348,22 +351,22 @@
         <div class="ai-chat-container">
           <div class="ai-messages-scroll" id="aiChatMessages">
             <div class="ai-message bot">
-              <div class="message-avatar">👨‍🍳</div>
+              <img src="img_mr_foodie_robot.jpg" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-gold); margin-right: 6px;" alt="Mr. Foodie">
               <div class="message-bubble">
-                Hello Chef! I'm your AI kitchen assistant. Tell me what's in your pantry, ask for substitutions, or request recipe ideas tailored to your diet!
+                Hi ! my name is Mr. Foodie . How may i assist you Chef
               </div>
             </div>
           </div>
 
           <div class="quick-prompts-row">
-            <button class="quick-prompt-chip" data-prompt="What can I cook with Chicken, Garlic and Rice?">🍗 Chicken & Rice dinner</button>
-            <button class="quick-prompt-chip" data-prompt="Quick high-protein breakfast in 10 minutes">⚡ 10m high protein breakfast</button>
+            <button class="quick-prompt-chip" data-prompt="How do I make chocolate lava cake?">🍫 Chocolate Lava Cake</button>
             <button class="quick-prompt-chip" data-prompt="What can I substitute for Heavy Cream?">🥛 Heavy cream substitute</button>
+            <button class="quick-prompt-chip" data-prompt="What can I cook with Chicken, Garlic and Rice?">🍗 Chicken & Rice dinner</button>
             <button class="quick-prompt-chip" data-prompt="Give me a healthy low carb dinner idea">🥗 Low carb dinner</button>
           </div>
 
           <form id="aiChatForm" class="ai-input-bar">
-            <input type="text" id="aiChatInput" class="ai-text-input" placeholder="Ask Chef Gemini anything (e.g. 'Can I swap butter for oil?')...">
+            <input type="text" id="aiChatInput" class="ai-text-input" placeholder="Ask Mr. Foodie anything (recipes, substitutions, cooking tips)...">
             <button type="submit" class="btn-ai-send">➔</button>
           </form>
         </div>

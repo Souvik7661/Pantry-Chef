@@ -2274,8 +2274,11 @@ function appendAiMessage(sender, text) {
   const chatScroll = document.getElementById("aiChatMessages");
   const msgEl = document.createElement("div");
   msgEl.className = `ai-message ${sender}`;
+  const avatarHtml = sender === 'bot'
+    ? '<img src="img_mr_foodie_robot.jpg" style="width: 28px; height: 28px; border-radius: 50%; object-fit: cover; border: 1px solid var(--accent-gold); margin-right: 6px;" alt="Mr. Foodie">'
+    : '<div class="message-avatar">👤</div>';
   msgEl.innerHTML = `
-    <div class="message-avatar">${sender === 'bot' ? '👨‍🍳' : '👤'}</div>
+    ${avatarHtml}
     <div class="message-bubble">${text}</div>
   `;
   chatScroll.appendChild(msgEl);

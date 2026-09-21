@@ -2,6 +2,7 @@ package com.example.ui.screens.home
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -58,10 +59,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.R
 import com.example.data.sample.SeedData
 import com.example.ui.components.ActiveTimersContainer
 import com.example.ui.components.FeaturedPlatedDishCard
@@ -167,20 +172,34 @@ fun HomeScreen(
                         )
                     }
 
-                    // AI Recipe Generator shortcut
+                    // Mr. Foodie "Ask Me" shortcut button
                     Surface(
                         color = AmberGoldPrimary.copy(alpha = 0.12f),
-                        shape = CircleShape,
-                        border = BorderStroke(1.dp, AmberGoldPrimary.copy(alpha = 0.35f))
+                        shape = RoundedCornerShape(20.dp),
+                        border = BorderStroke(1.dp, AmberGoldPrimary.copy(alpha = 0.45f)),
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .clickable(onClick = onNavigateToAiGenerator)
+                            .testTag("ai_generator_btn")
                     ) {
-                        IconButton(
-                            onClick = onNavigateToAiGenerator,
-                            modifier = Modifier.testTag("ai_generator_btn")
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.AutoAwesome,
-                                contentDescription = "AI Recipe Assistant",
-                                tint = AmberGoldPrimary
+                            Image(
+                                painter = painterResource(id = R.drawable.img_mr_foodie_robot),
+                                contentDescription = "Ask Me",
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier
+                                    .size(28.dp)
+                                    .clip(CircleShape)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = "Ask Me",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = AmberGoldPrimary
                             )
                         }
                     }
@@ -450,7 +469,7 @@ fun HomeScreen(
                         Icon(imageVector = Icons.Default.RestaurantMenu, contentDescription = null)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "What Can I Cook? (${recipeMatches.size} Recipes)",
+                            text = if (selectedIngredients.isEmpty()) "Select Ingredients to Cook" else "What Can I Cook? (${recipeMatches.size} Recipes)",
                             fontSize = 15.sp,
                             fontWeight = FontWeight.Bold
                         )
@@ -459,32 +478,66 @@ fun HomeScreen(
             }
         }
 
-        // Top Matches Carousel
+        // Top Matches Carousel or Empty Selection Prompt
         item {
             Column(modifier = Modifier.fillMaxWidth()) {
-                SectionHeader(
-                    title = "Top Recipe Matches",
-                    subtitle = "Ranked by how many ingredients you have",
-                    actionLabel = "See All",
-                    onAction = onNavigateToResults,
-                    modifier = Modifier.padding(horizontal = 20.dp)
-                )
+                if (topMatches.isNotEmpty()) {
+                    SectionHeader(
+                        title = "Top Recipe Matches",
+                        subtitle = "Ranked by how many ingredients you have",
+                        actionLabel = "See All",
+                        onAction = onNavigateToResults,
+                        modifier = Modifier.padding(horizontal = 20.dp)
+                    )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
 
-                LazyRow(
-                    contentPadding = PaddingValues(horizontal = 20.dp),
-                    horizontalArrangement = Arrangement.spacedBy(14.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    items(topMatches, key = { it.recipe.id }) { match ->
-                        RecipeCard(
-                            matchResult = match,
-                            isFavorite = favoriteIds.contains(match.recipe.id),
-                            onFavoriteToggle = { viewModel.toggleFavorite(match.recipe.id) },
-                            onClick = { onNavigateToDetail(match.recipe.id) },
-                            modifier = Modifier.width(260.dp)
-                        )
+                    LazyRow(
+                        contentPadding = PaddingValues(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.spacedBy(14.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        items(topMatches, key = { it.recipe.id }) { match ->
+                            RecipeCard(
+                                matchResult = match,
+                                isFavorite = favoriteIds.contains(match.recipe.id),
+                                onFavoriteToggle = { viewModel.toggleFavorite(match.recipe.id) },
+                                onClick = { onNavigateToDetail(match.recipe.id) },
+                                modifier = Modifier.width(260.dp)
+                            )
+                        }
+                    }
+                } else {
+                    Card(
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                        ),
+                        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha = 0.4f)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = "🍳 Ready to Cook, $chefName?",
+                                style = MaterialTheme.typography.titleMedium,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(modifier = Modifier.height(6.dp))
+                            Text(
+                                text = "Choose or type ingredients above, or tap 'All Pantry' to see what delicious dishes match your kitchen stock.",
+                                style = MaterialTheme.typography.bodySmall,
+                                textAlign = TextAlign.Center,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
                     }
                 }
             }
